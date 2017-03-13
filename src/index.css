@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.board {
+    width: 500px;
+    height: 500px;
+    margin: 50px auto 0;
+    background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+}
+
+.board__row {
+    flex: 1;
+    display: flex;
+}
+
+.light {
+    flex: 1;
+    border: 1px solid #fff;
+    background-color: #ccc;
+}
+
+.light--on {
+    background-color: tan;
+}
