@@ -20,7 +20,7 @@ const makeBoard = (board, size) => {
     }     
 }
 
-const _getField = (board, props) => {
+const getField = (board, props) => {
     const { row, col } = props;
 
     if(
@@ -37,7 +37,7 @@ const _getField = (board, props) => {
 }
 
 const updateBoard = (board, row, col) => {
-    const field = _getField(board, {
+    const field = getField(board, {
         row, col
     })
 
@@ -76,7 +76,7 @@ export const createGame = (boardSize =  5) => {
 
     return {
         getBoard: () => board,
-        getField: props => _getField(board, props),
+        getField: props => getField(board, props),
         toggleField,
         ...process.env.NODE_ENV === 'test' 
             && { TEST: {
