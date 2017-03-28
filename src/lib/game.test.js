@@ -6,12 +6,14 @@ describe('Game', () => {
         
         it('it uses 5 as default value', () => {
             const game = createGame();
-            expect(game.TEST.boardSize).toBe(5)
+            expect(game.TEST.options.boardSize).toBe(5)
         })
 
         it('sets size as parameter', () => {
-            const game = createGame(7);
-            expect(game.TEST.boardSize).toBe(7)
+            const game = createGame({
+                boardSize: 7
+            });
+            expect(game.TEST.options.boardSize).toBe(7)
         })
 
     })
@@ -39,7 +41,9 @@ describe('Game', () => {
         let game;
 
         beforeAll(() => {
-            game = createGame(3)
+            game = createGame({
+                boardSize: 3
+            })
         })
 
         it('throws errors', () => {
@@ -84,7 +88,9 @@ describe('Game', () => {
         let game;
 
         beforeEach(() => {
-            game = createGame(3)
+            game = createGame({
+                boardSize: 3
+            })
         })
 
         it('toggles clicked field', () => {

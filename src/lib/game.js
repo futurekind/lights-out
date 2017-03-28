@@ -61,8 +61,13 @@ const updateBoard = (board, row, col) => {
     }, [])
 }
 
-export const createGame = (boardSize =  5) => {
-    let board = makeBoard([], boardSize);
+export const createGame = (settings = {}) => {
+    const options = {
+        boardSize: 5,
+        ...settings
+    }
+
+    let board = makeBoard([], options.boardSize);
 
     const toggleField = props => {
         const { row, col } = props;
@@ -80,7 +85,7 @@ export const createGame = (boardSize =  5) => {
         toggleField,
         ...process.env.NODE_ENV === 'test' 
             && { TEST: {
-                boardSize
+                options
             } }
     }
 }
