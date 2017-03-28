@@ -157,4 +157,42 @@ describe('Game', () => {
         })
     })
 
+    describe('isBoardSolved()', () => {
+        let game;
+
+        beforeEach(() => {
+            game = createGame({
+                boardSize: 3
+            })
+        })
+
+        it('returns false', () => {
+            expect(
+                game.isBoardSolved()
+            ).toBe(false)
+        })
+
+        it('returns true', () => {
+            game.toggleField({ row: 1, col: 0})
+            game.toggleField({ row: 1, col: 1})
+            game.toggleField({ row: 1, col: 2})
+            game.toggleField({ row: 2, col: 0})
+            game.toggleField({ row: 2, col: 2})
+            game.toggleField({ row: 0, col: 2})
+            game.toggleField({ row: 1, col: 1})
+            game.toggleField({ row: 1, col: 2})
+            game.toggleField({ row: 2, col: 0})
+            game.toggleField({ row: 2, col: 2})
+            game.toggleField({ row: 0, col: 0})
+            game.toggleField({ row: 1, col: 0})
+            game.toggleField({ row: 1, col: 1})
+            game.toggleField({ row: 2, col: 0})
+            game.toggleField({ row: 2, col: 2})
+
+            expect(
+                game.isBoardSolved()
+            ).toBe(true)
+        })
+    })
+
 })

@@ -9,7 +9,9 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.game = createGame();
+        this.game = createGame({
+            boardSize: 3
+        });
 
         this.state = {
             board: this.game.getBoard()

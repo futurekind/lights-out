@@ -61,6 +61,17 @@ const updateBoard = (board, row, col) => {
     }, [])
 }
 
+const countInactiveFields = (board) => {
+    return board.reduce((prev, row) => {
+        const rowValues = row.reduce((prevRow, cell) => {
+            if(cell === false) return prevRow + 1;
+            return prevRow
+        }, 0)
+
+        return rowValues + prev
+    }, 0);
+}
+
 export const createGame = (settings = {}) => {
     const options = {
         boardSize: 5,
@@ -83,6 +94,7 @@ export const createGame = (settings = {}) => {
         getBoard: () => board,
         getField: props => getField(board, props),
         toggleField,
+        isBoardSolved: () => countInactiveFields(board) === options.boardSize * options.boardSize, 
         ...process.env.NODE_ENV === 'test' 
             && { TEST: {
                 options
