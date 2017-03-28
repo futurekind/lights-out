@@ -1,20 +1,26 @@
-const makeRow = (row, size) => {
-    if(row.length < size) {
+const getRandomCellIndex = rowSize => Math.floor(Math.random() * rowSize)
+
+const makeRow = (row, options) => {
+    const value = options.withRandomness
+        ? getRandomCellIndex(options.boardSize) !== row.length
+        : true
+
+    if(row.length < options.boardSize) {
         return makeRow([
             ...row,
-            true
-        ], size)
+            value
+        ], options)
     } else {
         return row
     }
 }
 
-const makeBoard = (board, size) => {
-    if(board.length < size) {
+const makeBoard = (board, options) => {
+    if(board.length < options.boardSize) {
         return makeBoard([
             ...board,
-            makeRow([], size)
-        ], size)
+            makeRow([], options)
+        ], options)
     } else {
         return board;
     }     
@@ -75,10 +81,11 @@ const countInactiveFields = (board) => {
 export const createGame = (settings = {}) => {
     const options = {
         boardSize: 5,
+        withRandomness: false,
         ...settings
     }
 
-    let board = makeBoard([], options.boardSize);
+    let board = makeBoard([], options);
 
     const toggleField = props => {
         const { row, col } = props;

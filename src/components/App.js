@@ -10,7 +10,8 @@ class App extends Component {
         super(props);
 
         this.game = createGame({
-            boardSize: 3
+            boardSize: 5,
+            withRandomness: true
         });
 
         this.state = {

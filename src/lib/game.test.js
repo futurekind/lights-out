@@ -195,4 +195,26 @@ describe('Game', () => {
         })
     })
 
+    describe('options withRandomness', () => {
+        let game;
+
+        beforeEach(() => {
+            game = createGame({
+                boardSize: 3,
+                withRandomness: true
+            })
+        })
+
+        it('shouldn\'t be all true ;)', () => {
+            expect(
+                game.getBoard()
+            ).not.toEqual([
+                [true, true, true],
+                [true, true, true],
+                [true, true, true]
+            ])
+        })
+
+    })
+
 })
