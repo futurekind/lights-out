@@ -78,6 +78,22 @@ const countInactiveFields = (board) => {
     }, 0);
 }
 
+const toggleFieldOnBoard = (board, props) => {
+    const { row, col } = props;
+
+    board = updateBoard(board, row, col)
+    board = updateBoard(board, row - 1, col)
+    board = updateBoard(board, row + 1, col)
+    board = updateBoard(board, row, col - 1)
+    board = updateBoard(board, row, col + 1)
+
+    return board;
+}
+
+const isSlovable = (board, options) => {
+
+}
+
 export const createGame = (settings = {}) => {
     const options = {
         boardSize: 5,
@@ -88,13 +104,7 @@ export const createGame = (settings = {}) => {
     let board = makeBoard([], options);
 
     const toggleField = props => {
-        const { row, col } = props;
-
-        board = updateBoard(board, row, col)
-        board = updateBoard(board, row - 1, col)
-        board = updateBoard(board, row + 1, col)
-        board = updateBoard(board, row, col - 1)
-        board = updateBoard(board, row, col + 1)
+        board = toggleFieldOnBoard(board, props)
     }
 
     return {
