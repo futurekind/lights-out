@@ -1,3 +1,13 @@
+const KNOWN_LAST_ROWS = [
+    [0, 1, 2],
+    [0, 1, 3, 4],
+    [0, 2, 3],
+    [0, 4],
+    [1, 2, 4],
+    [1, 3],
+    [2, 3, 4]
+]
+
 const getRandomCellIndex = rowSize => Math.floor(Math.random() * rowSize)
 
 const makeRow = (row, options) => {
@@ -90,8 +100,75 @@ const toggleFieldOnBoard = (board, props) => {
     return board;
 }
 
-const isSlovable = (board, options) => {
+const getClickableColsForRow = (board, rowIndex = 0) => {
+    return board[rowIndex].reduce((prev, value, index) => {
+        if(value) {
+            return [
+                ...prev,
+                index
+            ]
+        }
 
+        return prev
+    }, [])
+}
+
+const isSolvable = (board, options) => {
+    let boardToTest = board
+    const { boardSize } = options;
+
+    if(boardSize !== 5) return true;
+    
+
+    const round1 = getClickableColsForRow(boardToTest, 0);
+    round1.forEach(colIndex => {
+        boardToTest = toggleFieldOnBoard(boardToTest, {
+            row: 1,
+            col: colIndex
+        })
+    })
+
+    const round2 = getClickableColsForRow(boardToTest, 1);
+    round2.forEach(colIndex => {
+        boardToTest = toggleFieldOnBoard(boardToTest, {
+            row: 2,
+            col: colIndex
+        })
+    })
+
+    const round3 = getClickableColsForRow(boardToTest, 2);
+    round3.forEach(colIndex => {
+        boardToTest = toggleFieldOnBoard(boardToTest, {
+            row: 3,
+            col: colIndex
+        })
+    })
+
+    const round4 = getClickableColsForRow(boardToTest, 3);
+    round4.forEach(colIndex => {
+        boardToTest = toggleFieldOnBoard(boardToTest, {
+            row: 4,
+            col: colIndex
+        })
+    })
+
+    const lastRowClicks = getClickableColsForRow(boardToTest, 4)
+
+    const isKnown = KNOWN_LAST_ROWS.filter(solution => {
+        return JSON.stringify(solution) === JSON.stringify(lastRowClicks)
+    })
+
+    return isKnown.length !== 0;
+}
+
+const makeSlovableBoard = (board, options) => {
+    const newBoard = makeBoard(board, options);
+
+    if(isSolvable(newBoard, options)) {
+        return newBoard;
+    } else {
+        return makeSlovableBoard([], options);
+    }
 }
 
 export const createGame = (settings = {}) => {
@@ -101,7 +178,7 @@ export const createGame = (settings = {}) => {
         ...settings
     }
 
-    let board = makeBoard([], options);
+    let board = makeSlovableBoard([], options);
 
     const toggleField = props => {
         board = toggleFieldOnBoard(board, props)
@@ -114,7 +191,8 @@ export const createGame = (settings = {}) => {
         isBoardSolved: () => countInactiveFields(board) === options.boardSize * options.boardSize, 
         ...process.env.NODE_ENV === 'test' 
             && { TEST: {
-                options
+                options,
+                getClickableColsForRow
             } }
     }
 }
