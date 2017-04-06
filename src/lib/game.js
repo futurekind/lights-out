@@ -174,7 +174,7 @@ const makeSlovableBoard = (board, options) => {
 export const createGame = (settings = {}) => {
     const options = {
         boardSize: 5,
-        withRandomness: false,
+        withRandomness: true,
         ...settings
     }
 
