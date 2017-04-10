@@ -12,6 +12,14 @@ body {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    transition: transform .3s cubic-bezier(.71,0,.43,1),
+                opacity .3s cubic-bezier(.71,0,.43,1) .2s;
+}
+
+.board--solved {
+    transform: scale(10);
+    opacity: 0;
+    pointer-events: none;
 }
 
 .board__row {

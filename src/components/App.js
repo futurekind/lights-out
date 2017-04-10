@@ -23,6 +23,7 @@ class App extends Component {
             <div>
                 <Board 
                     board={ board } 
+                    isSolved={ this.game.isBoardSolved() }
                     onLightClick={ this.handleLightClick }
                 />
             </div>
