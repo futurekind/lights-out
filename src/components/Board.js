@@ -4,10 +4,11 @@ import Light from './Light';
 
 const Board = ({
     board,
+    isSolved,
     onLightClick
 }) => {
     return (
-        <div className="board">
+        <div className={`board ${ isSolved ? 'board--solved' : ''}`}>
             { board.map((row, rowIndex) => {
                 return (
                     <div className="board__row" key={ rowIndex }>
@@ -31,6 +32,7 @@ Board.propTypes = {
     board: PropTypes.arrayOf(
         PropTypes.array,
     ).isRequired,
+    isSolved: PropTypes.bool,
     onLightClick: PropTypes.func.isRequired,   
 }
 

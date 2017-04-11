@@ -42,7 +42,8 @@ describe('Game', () => {
 
         beforeAll(() => {
             game = createGame({
-                boardSize: 3
+                boardSize: 3,
+                withRandomness: false
             })
         })
 
@@ -89,7 +90,8 @@ describe('Game', () => {
 
         beforeEach(() => {
             game = createGame({
-                boardSize: 3
+                boardSize: 3,
+                withRandomness: false
             })
         })
 
@@ -162,7 +164,8 @@ describe('Game', () => {
 
         beforeEach(() => {
             game = createGame({
-                boardSize: 3
+                boardSize: 3,
+                withRandomness: false
             })
         })
 
@@ -201,7 +204,6 @@ describe('Game', () => {
         beforeEach(() => {
             game = createGame({
                 boardSize: 3,
-                withRandomness: true
             })
         })
 

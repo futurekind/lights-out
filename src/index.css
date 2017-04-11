@@ -4,12 +4,22 @@ body {
 }
 
 .board {
-    width: 500px;
-    height: 500px;
+    width: 95vw;
+    height: 95vw;
+    max-width: 600px;
+    max-height: 600px;
     margin: 50px auto 0;
-    background-color: #ccc;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
+    transition: transform .3s cubic-bezier(.71,0,.43,1),
+                opacity .3s cubic-bezier(.71,0,.43,1) .2s;
+}
+
+.board--solved {
+    transform: scale(10);
+    opacity: 0;
+    pointer-events: none;
 }
 
 .board__row {
@@ -19,10 +29,14 @@ body {
 
 .light {
     flex: 1;
+    border-radius: 5px;
     border: 1px solid #fff;
-    background-color: #ccc;
+    background-color: #85b795;
+    opacity: .8;
+    transition: background-image .1s;
+    cursor: pointer;
 }
 
 .light--on {
-    background-color: tan;
+    background-image: radial-gradient(circle at center, #fff 0%, #FFDC00 40%, #FF851B 95%, transparent 180%);
 }
