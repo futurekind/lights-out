@@ -12,8 +12,8 @@ body {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    transition: transform .3s cubic-bezier(.71,0,.43,1),
-                opacity .3s cubic-bezier(.71,0,.43,1) .2s;
+    transition: transform .7s cubic-bezier(.71,0,.47,1),
+                opacity .7s cubic-bezier(.71,0,.47,1);
 }
 
 .board--solved {
@@ -39,4 +39,10 @@ body {
 
 .light--on {
     background-image: radial-gradient(circle at center, #fff 0%, #FFDC00 40%, #FF851B 95%, transparent 180%);
+}
+
+.controls {
+    width: 95vw;
+    max-width: 600px;
+    margin: 50px auto 0;
 }

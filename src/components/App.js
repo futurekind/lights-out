@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { createGame } from '../lib/game';
 import Board from './Board'
+import Controls from './Controls';
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
                     isSolved={ this.game.isBoardSolved() }
                     onLightClick={ this.handleLightClick }
                 />
+                <Controls />
             </div>
         )
     }
